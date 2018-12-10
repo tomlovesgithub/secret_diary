@@ -1,0 +1,23 @@
+Group the listed methods below
+
+Bank
+
+  - get_balance
+  - credit_account(date, amount)
+  - debit_account(date, amount)
+  - print_statement
+
+SecretDiary
+
+  - lock
+  - unlock
+  - add_entry
+  - get_entries
+
+Bank
+Balance related
+- get_balance
+- print_statement
+Account effectors(with, args)
+- debit_account(date, amount)
+-credit_account(date, amount)
