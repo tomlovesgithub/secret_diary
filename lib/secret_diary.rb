@@ -47,8 +47,8 @@
 #
 # This will also involve reorganising your tests!
 
-require "lock"
-require "Entry"
+require_relative "./lock.rb"
+require_relative "./Entry"
 
 
 class SecretDiary
