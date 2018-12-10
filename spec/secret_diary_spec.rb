@@ -1,25 +1,12 @@
-# Test-drive the secret diary example:
-#
-# SecretDiary
-#   - lock
-#   - unlock
-#   - add_entry
-#   - get_entries
-#
-# Initially the `SecretDiary` class is locked, meaning `add_entry` and `get_entries` should throw an error.
-#
-# When the user calls `unlock`, `add_entry` and `get_entries` should work as desired.
-#
-# When the user calls `lock` again they throw errors again.
-# First organise it into one class only.
-#
-# Then, when all your tests are green, reorganise it into classes with high cohesion.
-#
-# This will also involve reorganising your tests!
-
 require_relative '../lib/secret_diary.rb'
 
+# Test-drive the secret diary example:
+
 describe SecretDiary do
+
+  # SecretDiary
+  #   - lock
+  #   - unlock
 
   let(:diary) { SecretDiary.new }
 
@@ -29,15 +16,25 @@ describe SecretDiary do
       (diary.unlock)
       expect{diary.lock}.to change{diary.unlocked}.from(true).to(false)
     end
-
+    # Initially the `SecretDiary` class is locked, meaning `add_entry` and `get_entries` should throw an error.
     context "when locked" do
 
-      it "#add_entry and get_entry throw errors" do
+      #   - add_entry
+
+      it "#add_entry throws errors" do
         expect{ diary.add_entry("stuff","things") }.to raise_error("Diary locked")
       end
 
-      it "#add_entry and get_entry throw errors" do
+      #   - get_entry
+
+      it "#get_entry throws errors" do
         expect{ diary.get_entry("stuff") }.to raise_error("Diary locked")
+      end
+
+      #   - get_entries
+
+      it "#get_entry throws errors" do
+        expect{ diary.get_entries }.to raise_error("Diary locked")
       end
 
     end
@@ -51,7 +48,7 @@ describe SecretDiary do
     end
 
     context "when unlocked" do
-
+      # When the user calls `unlock`, `add_entry` and `get_entries` should work as desired.
       before(:each) { diary.unlock }
 
       it "#add_entry adds entries" do
@@ -61,13 +58,21 @@ describe SecretDiary do
 
     end
 
-    context "fuck" do
+    context "after entries added" do
 
       before(:each) { diary.unlock }
-      before(:each) { diary.add_entry("stuff","things") }
+      before(:each) {
+        diary.add_entry("stuff","things")
+        diary.add_entry("things","and stuff")
+        diary.add_entry("and stuff","and things")
+      }
 
-      it "fuck" do
+      it "get_entry(title) gets specific entry" do
         expect(diary.get_entry("stuff")).to eq("things")
+      end
+
+      it "get_entry(title) gets specific entry" do
+        expect(diary.get_entries).to eq([{:stuff=>"things"}, {:things=>"and stuff"}, {:"and stuff"=>"and things"}])
       end
 
     end
@@ -76,3 +81,9 @@ describe SecretDiary do
   end
 
 end
+
+# First organise it into one class only.
+#
+# Then, when all your tests are green, reorganise it into classes with high cohesion.
+#
+# This will also involve reorganising your tests!

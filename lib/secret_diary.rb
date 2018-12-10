@@ -33,4 +33,10 @@ class SecretDiary
     check
     @diary[0][title.to_sym]
   end
+
+  def get_entries
+    check
+    @diary
+  end
+
 end
