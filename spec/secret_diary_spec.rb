@@ -52,8 +52,7 @@ describe SecretDiary do
       before(:each) { diary.unlock }
 
       it "#add_entry adds entries" do
-        expect { diary.add_entry("stuff","things") }.to change { diary.diary.count }.from(0).to(1)
-
+        expect { diary.add_entry("stuff","things") }.to change { diary.get_entries.count }.from(0).to(1)
       end
 
     end
@@ -81,9 +80,3 @@ describe SecretDiary do
   end
 
 end
-
-# First organise it into one class only.
-#
-# Then, when all your tests are green, reorganise it into classes with high cohesion.
-#
-# This will also involve reorganising your tests!

@@ -41,46 +41,21 @@
 #
 # end
 
-# require_relative "./Entry.rb"
-
 # Then, when all your tests are green, reorganise it into classes with high cohesion.
 #
 # This will also involve reorganising your tests!
 
-require "lock"
-require "Entry"
 
+module Lock
 
-class SecretDiary
+  attr_reader :unlocked
 
-  include Lock
-
-  attr_accessor :diary
-
-  def initialize
-    @diary = []
-    lock
+  def unlock
+    @unlocked = true
   end
 
-  def add_entry(title, entry)
-    check
-    new_entry = Entry.new(title, entry, self)
-  end
-
-  def check
-    if @unlocked == false
-      fail("Diary locked")
-    end
-  end
-
-  def get_entry(title)
-    check
-    @diary[0][title.to_sym]
-  end
-
-  def get_entries
-    check
-    @diary
+  def lock
+    @unlocked = false
   end
 
 end
